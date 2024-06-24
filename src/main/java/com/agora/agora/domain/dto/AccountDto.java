@@ -1,10 +1,11 @@
 package com.agora.agora.domain.dto;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AccountDto {
 
     private Long id;

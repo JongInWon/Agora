@@ -1,4 +1,4 @@
-package com.agora.agora.config;
+package com.agora.agora.security;
 
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
