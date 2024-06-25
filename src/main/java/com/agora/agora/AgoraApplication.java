@@ -1,6 +1,6 @@
 package com.agora.agora;
 
-import com.agora.agora.security.AuditorAwareImpl;
+import com.agora.agora.security.configs.AuditorAwareImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
