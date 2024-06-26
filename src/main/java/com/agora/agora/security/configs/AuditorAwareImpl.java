@@ -1,11 +1,13 @@
 package com.agora.agora.security.configs;
 
+import io.micrometer.common.lang.NonNullApi;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Optional;
 
+@NonNullApi
 public class AuditorAwareImpl implements AuditorAware<String> {
 
     @Override
