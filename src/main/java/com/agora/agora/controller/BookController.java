@@ -1,6 +1,6 @@
 package com.agora.agora.controller;
 
-import com.agora.agora.config.WebClientFactory;
+import com.agora.agora.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +13,11 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class BookController {
 
-
-    private final WebClientFactory webClientFactory;
+    private final BookService bookService;
 
     @GetMapping("/data")
     public String getData(@RequestParam("query") String query, Model model) {
-        Map books = webClientFactory.WebClient().getBooksData(query);
+        Map books = bookService.getBooksData(query);
         model.addAttribute("books", books);
         return "kakao";
     }
