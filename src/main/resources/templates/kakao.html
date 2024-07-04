@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .container-fluid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            padding: 0;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+        }
+
+    </style>
+</head>
+<title>Hello</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<body>
+<div th:replace="~{layout/header::header}"></div>
+<div class="container-fluid">
+    <div class="card" th:each="book : ${books.documents}">
+        <img th:src="${book.thumbnail}" alt="">
+        <div th:text="${book.title}"></div>
+        <div th:text="${book.authors}"></div>
+    </div>
+</div>
+</body>
+</html>
