@@ -12,5 +12,5 @@ import java.util.Map;
 public interface KakaoBookRepository {
 
     @GetExchange("/v3/search/book")
-    Map searchBooks(@RequestParam("query") String query);
+    Map<String, Object> searchBooks(@RequestParam("query") String query);
 }

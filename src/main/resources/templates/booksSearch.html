@@ -28,7 +28,7 @@
 <body>
 <div th:replace="~{layout/header::header}"></div>
 <div class="container-fluid">
-    <div class="card" th:each="book : ${books.documents}">
+    <div class="card" th:each="book : ${books}">
         <img th:src="${book.thumbnail}" alt="">
         <div th:text="${book.title}"></div>
         <div th:text="${book.authors}"></div>
