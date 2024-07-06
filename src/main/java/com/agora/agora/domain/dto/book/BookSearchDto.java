@@ -1,4 +1,4 @@
-package com.agora.agora.domain.dto;
+package com.agora.agora.domain.dto.book;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class BookSearchResponse {
+public class BookSearchDto {
     private List<BookDto> documents;
     private Meta meta;
 }

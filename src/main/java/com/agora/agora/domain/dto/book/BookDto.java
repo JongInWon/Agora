@@ -1,4 +1,4 @@
-package com.agora.agora.domain.dto;
+package com.agora.agora.domain.dto.book;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

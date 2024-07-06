@@ -1,6 +1,6 @@
 package com.agora.agora.controller;
 
-import com.agora.agora.domain.dto.BookSearchResponse;
+import com.agora.agora.domain.dto.book.BookSearchDto;
 import com.agora.agora.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ public class BookController {
 
     @GetMapping("/search")
     public String getData(@RequestParam("query") String query, Model model) {
-        BookSearchResponse booksData = bookService.getBooksData(query);
+        BookSearchDto booksData = bookService.getBooksData(query);
         model.addAttribute("books", booksData.getDocuments());
         return "booksSearch";
     }

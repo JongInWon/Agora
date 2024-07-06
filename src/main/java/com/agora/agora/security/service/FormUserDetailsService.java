@@ -22,6 +22,7 @@ import java.util.List;
 public class FormUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -31,8 +32,7 @@ public class FormUserDetailsService implements UserDetailsService {
         }
 
         List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(account.getRoles()));
-        ModelMapper mapper = new ModelMapper();
-        AccountDto accountDto = mapper.map(account, AccountDto.class);
+        AccountDto accountDto = modelMapper.map(account, AccountDto.class);
 
         return new AccountContext(accountDto, authorities);
     }

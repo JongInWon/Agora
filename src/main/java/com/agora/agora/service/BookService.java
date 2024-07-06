@@ -1,7 +1,7 @@
 package com.agora.agora.service;
 
-import com.agora.agora.config.WebClientFactory;
-import com.agora.agora.domain.dto.BookSearchResponse;
+import com.agora.agora.domain.dto.book.BookSearchDto;
+import com.agora.agora.repository.KakaoBookRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -12,11 +12,11 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class BookService {
 
-    private final WebClientFactory kakaoBookRepository;
+    private final KakaoBookRepository kakaoBookRepository;
+    private final ModelMapper modelMapper;
 
-    public BookSearchResponse getBooksData(String query) {
-        Map<String, Object> books = kakaoBookRepository.WebClient().searchBooks(query);
-        ModelMapper mapper = new ModelMapper();
-        return mapper.map(books, BookSearchResponse.class);
+    public BookSearchDto getBooksData(String query) {
+        Map<String, Object> books = kakaoBookRepository.searchBooks(query);
+        return modelMapper.map(books, BookSearchDto.class);
     }
 }
