@@ -21,7 +21,8 @@ public class UserController {
 
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
-    
+    private final ModelMapper modelMapper;
+
     @PostMapping("/signup")
     public String signup(@ModelAttribute("accountDto") AccountDto accountDto, BindingResult bindingResult, Model model) {
         if (userService.checkDuplicateUsername(accountDto.getUsername())) {
@@ -29,9 +30,12 @@ public class UserController {
             return "login/signup";
         }
 
-        ModelMapper mapper = new ModelMapper();
-        Account account = mapper.map(accountDto, Account.class);
-        account.setPassword(passwordEncoder.encode(accountDto.getPassword()));
+        Account account = Account.builder()
+                .username(accountDto.getUsername())
+                .password(passwordEncoder.encode(accountDto.getPassword()))
+                .roles(accountDto.getRoles())
+                .build();
+
         userService.createUser(account);
         return "redirect:/";
     }

@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
-
+    
     @Transactional
     public void createUser(Account account) {
         userRepository.save(account);
