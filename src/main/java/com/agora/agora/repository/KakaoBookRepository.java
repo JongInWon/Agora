@@ -1,16 +1,14 @@
 package com.agora.agora.repository;
 
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.HttpExchange;
 
-import java.util.Map;
-
-@Component
 @HttpExchange
 public interface KakaoBookRepository {
 
     @GetExchange("/v3/search/book")
-    Map<String, Object> searchBooks(@RequestParam("query") String query);
+    String searchBooks(@RequestParam("query") String query, @RequestParam("target") String target);
 }
+
+

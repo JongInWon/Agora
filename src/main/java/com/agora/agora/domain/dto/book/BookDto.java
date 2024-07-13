@@ -1,13 +1,17 @@
 package com.agora.agora.domain.dto.book;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import java.util.List;
 
-@Data
+@Getter
+@Builder
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class BookDto {
+    
     private List<String> authors;
     private List<String> translators;
     private String title;
