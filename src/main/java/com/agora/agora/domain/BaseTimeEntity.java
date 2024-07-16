@@ -1,4 +1,4 @@
-package com.agora.agora.domain.entity;
+package com.agora.agora.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
@@ -18,7 +18,7 @@ public class BaseTimeEntity {
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdDate;
-    
+
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 }

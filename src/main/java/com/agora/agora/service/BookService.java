@@ -14,10 +14,11 @@ import org.springframework.stereotype.Service;
 public class BookService {
 
     private final KakaoBookRepository kakaoBookRepository;
+    private final ObjectMapper objectMapper;
 
+    // TODO: 예외 처리 리팩토링
     public BookSearchDto getBooksDataByTarget(String query, String target) throws JsonProcessingException {
         String books = kakaoBookRepository.searchBooks(query, target);
-        ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(books, BookSearchDto.class);
     }
 }

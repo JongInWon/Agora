@@ -5,13 +5,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Account extends BaseTimeEntity {
 
@@ -20,16 +20,11 @@ public class Account extends BaseTimeEntity {
     private Long id;
 
     @Column(unique = true)
+    @NotBlank
     private String username;
 
+    @NotBlank
     private String password;
 
     private String roles;
-
-    @Builder
-    private Account(String username, String password, String roles) {
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
-    }
 }
