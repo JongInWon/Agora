@@ -19,34 +19,78 @@
         }
 
         .wrapper {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            display: flex;
+            flex-direction: row;
+            width: 1080px;
         }
 
-        .card {
-            display: flex;
-            flex-direction: column;
-            width: 200px;
+        .title_wrapper {
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 28px;
+        }
+
+        .image_wrapper {
+            margin-right: 50px;
+            box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.8);
         }
 
         img {
-            width: 200px;
-            height: 260px;
+            width: 300px;
+            height: 435px;
+            border-radius: 10px;
         }
 
+        .author_wrapper {
+            margin-bottom: 10px;
+        }
+
+        .publish_wrapper {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <title>Hello</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <body>
 <div th:replace="~{layout/header::header}"></div>
+
 <div class="container-fluid">
     <div class="wrapper">
-        <div class="card">
+        <div class="image_wrapper">
             <img th:src="${documents[0].thumbnail}" alt="">
-            <div th:text="${documents[0].title}"></div>
-            <div th:text="${documents[0].authors}"></div>
+        </div>
+
+        <div class="info_wrapper">
+            <div class="title_wrapper">
+                <h1 th:text="${documents[0].title}"/>
+            </div>
+
+            <div class="author_wrapper">
+                <span th:each="author : ${documents[0].authors}">
+                    <span th:text="${author}"/>
+                </span> 저자 (글)
+
+                <span th:if="${#lists.size(documents[0].translators)} > 0">
+                    <span>&nbsp;·&nbsp;</span>
+                        <span th:each="translator : ${documents[0].translators}">
+                        <span th:text="${translator}"/>
+                    </span> 번역
+                </span>
+            </div>
+
+            <div class="publish_wrapper">
+                <span th:text="${documents[0].publisher}"/>
+                <span>&nbsp;·&nbsp;</span>
+                <span th:text="${#temporals.format(T(java.time.OffsetDateTime).parse(documents[0].datetime), 'yyyy년 MM월 dd일')}"/>
+            </div>
+
+            <div class="info_text">
+                <p th:text="${documents[0].contents}"/>
+            </div>
         </div>
     </div>
 </div>
