@@ -1,6 +1,7 @@
 package com.agora.agora.service;
 
 import com.agora.agora.domain.dto.book.BookSearchDto;
+import com.agora.agora.domain.dto.book.DocumentsDto;
 import com.agora.agora.repository.KakaoBookRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,6 +20,8 @@ public class BookService {
     // TODO: 예외 처리 리팩토링
     public BookSearchDto getBooksDataByTarget(String query, String target) throws JsonProcessingException {
         String books = kakaoBookRepository.searchBooks(query, target);
-        return objectMapper.readValue(books, BookSearchDto.class);
+        BookSearchDto bookSearchDto = objectMapper.readValue(books, BookSearchDto.class);
+        bookSearchDto.getDocuments().forEach(DocumentsDto::changeToIsbn13);
+        return bookSearchDto;
     }
 }

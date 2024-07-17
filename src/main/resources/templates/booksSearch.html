@@ -44,7 +44,7 @@
 <div class="container-fluid">
     <div class="wrapper">
         <div class="card" th:each="book : ${books}">
-            <a th:href="@{/detail/{isbn}(isbn=${book.isbn})}">
+            <a th:href="@{/detail/isbn/{isbn}(isbn=${book.isbn})}">
                 <img th:src="${book.thumbnail}" alt="">
             </a>
             <div th:text="${book.title}"></div>

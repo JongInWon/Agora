@@ -43,12 +43,10 @@
 <div th:replace="~{layout/header::header}"></div>
 <div class="container-fluid">
     <div class="wrapper">
-        <div class="card" th:each="data : ${bookDetail}">
-            <a th:href="@{/detail/{isbn}(isbn=${data.isbn})}">
-                <img th:src="${data.thumbnail}" alt="">
-            </a>
-            <div th:text="${data.title}"></div>
-            <div th:text="${data.authors}"></div>
+        <div class="card">
+            <img th:src="${documents[0].thumbnail}" alt="">
+            <div th:text="${documents[0].title}"></div>
+            <div th:text="${documents[0].authors}"></div>
         </div>
     </div>
 </div>

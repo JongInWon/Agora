@@ -47,6 +47,19 @@ class BookServiceTest {
         assertThat(data1.getDocuments()).hasSize(1);
         assertThat(data2.getDocuments()).hasSize(1);
         assertThat(data1.getDocuments().get(0).getIsbn()).isEqualTo(data2.getDocuments().get(0).getIsbn());
+    }
+
+    @DisplayName("")
+    @Test
+    void test() {
+        // given
+        String query = "인생";
+        String target = "title";
+
+        // when
+        
+
+        // then
 
     }
 }

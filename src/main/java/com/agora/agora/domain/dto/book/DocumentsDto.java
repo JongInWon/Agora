@@ -10,8 +10,8 @@ import java.util.List;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class BookDto {
-    
+public class DocumentsDto {
+
     private List<String> authors;
     private List<String> translators;
     private String title;
@@ -21,4 +21,11 @@ public class BookDto {
     private String publisher;
     private String thumbnail;
     private String url;
+
+    public void changeToIsbn13() {
+        String[] isbnParts = isbn.split(" ");
+        if (isbnParts.length > 1) {
+            isbn = isbnParts[1];
+        }
+    }
 }
