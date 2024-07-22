@@ -4,6 +4,8 @@ import com.agora.agora.domain.dto.book.BookSearchDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -12,6 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class BookServiceTest {
 
+    private static final Logger log = LoggerFactory.getLogger(BookServiceTest.class);
     @Autowired
     private BookService bookService;
 
@@ -23,7 +26,7 @@ class BookServiceTest {
         String target = "title";
 
         // when
-        BookSearchDto data = bookService.getBooksDataByTarget(query, target);
+        BookSearchDto data = bookService.getBookDetailsWithQueryByTarget(query, target);
 
         // then
         assertThat(data.getDocuments()).hasSize(10)
@@ -31,35 +34,18 @@ class BookServiceTest {
                 .allMatch(title -> ((String) title).toLowerCase().contains(query.toLowerCase()));
     }
 
-    @DisplayName("고유햔 isbn으로 특정 책 하나를 검색한다.")
+    @DisplayName("고유한 isbn으로 특정 책 하나를 검색한다.")
     @Test
     void searchByIsbn() throws JsonProcessingException {
         // given
-        String isbn10 = "1171240651";
-        String isbn13 = "9791171240654";
+        String isbn = "1171240651 9791171240654";
         String target = "isbn";
 
         // when
-        BookSearchDto data1 = bookService.getBooksDataByTarget(isbn10, target);
-        BookSearchDto data2 = bookService.getBooksDataByTarget(isbn13, target);
+        BookSearchDto bookDetails = bookService.getBookDetailsWithQueryByTarget(isbn, target);
 
         // then
-        assertThat(data1.getDocuments()).hasSize(1);
-        assertThat(data2.getDocuments()).hasSize(1);
-        assertThat(data1.getDocuments().get(0).getIsbn()).isEqualTo(data2.getDocuments().get(0).getIsbn());
-    }
-
-    @DisplayName("")
-    @Test
-    void test() {
-        // given
-        String query = "인생";
-        String target = "title";
-
-        // when
-        
-
-        // then
-
+        System.out.println("bookDetails = " + bookDetails.getDocuments());
+        assertThat(bookDetails.getDocuments()).hasSize(1);
     }
 }

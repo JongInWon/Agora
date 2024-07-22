@@ -15,7 +15,6 @@
             height: 100%;
             margin-top: 100px;
             padding: 0;
-
         }
 
         .wrapper {
@@ -43,7 +42,7 @@
 <div th:replace="~{layout/header::header}"></div>
 <div class="container-fluid">
     <div class="wrapper">
-        <div class="card" th:each="book : ${books}">
+        <div class="card" th:each="book : ${documents}">
             <a th:href="@{/detail/isbn/{isbn}(isbn=${book.isbn})}">
                 <img th:src="${book.thumbnail}" alt="">
             </a>

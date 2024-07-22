@@ -8,7 +8,7 @@ import org.springframework.web.service.annotation.HttpExchange;
 public interface KakaoBookRepository {
 
     @GetExchange("/v3/search/book")
-    String searchBooks(@RequestParam("query") String query, @RequestParam("target") String target);
+    String findAllWithQueryByTarget(@RequestParam("query") String query, @RequestParam("target") String target);
 }
 
 

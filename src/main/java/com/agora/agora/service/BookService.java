@@ -18,9 +18,9 @@ public class BookService {
     private final ObjectMapper objectMapper;
 
     // TODO: 예외 처리 리팩토링
-    public BookSearchDto getBooksDataByTarget(String query, String target) throws JsonProcessingException {
-        String books = kakaoBookRepository.searchBooks(query, target);
-        BookSearchDto bookSearchDto = objectMapper.readValue(books, BookSearchDto.class);
+    public BookSearchDto getBookDetailsWithQueryByTarget(String query, String target) throws JsonProcessingException {
+        String findBooks = kakaoBookRepository.findAllWithQueryByTarget(query, target);
+        BookSearchDto bookSearchDto = objectMapper.readValue(findBooks, BookSearchDto.class);
         bookSearchDto.getDocuments().forEach(DocumentsDto::changeToIsbn13);
         return bookSearchDto;
     }
