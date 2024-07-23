@@ -10,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class BookSearchDto {
+    
     private List<DocumentsDto> documents;
     private MetaDto meta;
     private static ModelMapper modelMapper = new ModelMapper();

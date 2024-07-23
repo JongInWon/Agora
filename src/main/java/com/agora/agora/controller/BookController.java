@@ -3,7 +3,6 @@ package com.agora.agora.controller;
 import com.agora.agora.domain.dto.book.BookSearchDto;
 import com.agora.agora.domain.dto.book.DocumentsDto;
 import com.agora.agora.service.BookService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +19,7 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping("/search")
-    public String getBookDetailsWithQueryByTarget(@RequestParam("query") String query, @RequestParam("target") String target, Model model) throws JsonProcessingException {
+    public String getBookDetailsWithQueryByTarget(@RequestParam("query") String query, @RequestParam("target") String target, Model model) {
         BookSearchDto bookDetails = bookService.getBookDetailsWithQueryByTarget(query, target);
         List<DocumentsDto> documents = bookDetails.getDocuments();
         model.addAttribute("documents", documents);
@@ -28,7 +27,7 @@ public class BookController {
     }
 
     @GetMapping("/detail/{target}/{isbn}")
-    public String getBookDetailsPage(@PathVariable("isbn") String isbn, @PathVariable("target") String target, Model model) throws JsonProcessingException {
+    public String getBookDetailsPage(@PathVariable("isbn") String isbn, @PathVariable("target") String target, Model model) {
         BookSearchDto bookDetails = bookService.getBookDetailsWithQueryByTarget(isbn, target);
         List<DocumentsDto> documents = bookDetails.getDocuments();
         model.addAttribute("documents", documents);
