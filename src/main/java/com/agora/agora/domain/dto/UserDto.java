@@ -3,7 +3,7 @@ package com.agora.agora.domain.dto;
 import lombok.Data;
 
 @Data
-public class AccountDto {
+public class UserDto {
 
     private Long id;
     private String username;

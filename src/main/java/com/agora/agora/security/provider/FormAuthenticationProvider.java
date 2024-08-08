@@ -1,6 +1,6 @@
 package com.agora.agora.security.provider;
 
-import com.agora.agora.domain.dto.AccountContext;
+import com.agora.agora.domain.dto.UserContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -20,16 +20,13 @@ public class FormAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String loginId = authentication.getName();
+        String username = authentication.getName();
         String password = (String) authentication.getCredentials();
-        userDetailsService.loadUserByUsername(loginId);
-        AccountContext accountContext = (AccountContext) userDetailsService.loadUserByUsername(loginId);
-
-        if (!passwordEncoder.matches(password, accountContext.getPassword())) {
+        UserContext userContext = (UserContext) userDetailsService.loadUserByUsername(username);
+        if (!passwordEncoder.matches(password, userContext.getPassword())) {
             throw new BadCredentialsException("Invalid password");
         }
-
-        return new UsernamePasswordAuthenticationToken(accountContext.getAccountDto(), null, accountContext.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(userContext.getUserDto(), null, userContext.getAuthorities());
     }
 
     @Override

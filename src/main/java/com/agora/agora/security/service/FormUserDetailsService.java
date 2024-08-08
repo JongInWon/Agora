@@ -1,8 +1,8 @@
 package com.agora.agora.security.service;
 
-import com.agora.agora.domain.dto.AccountContext;
-import com.agora.agora.domain.dto.AccountDto;
-import com.agora.agora.domain.entity.Account;
+import com.agora.agora.domain.dto.UserContext;
+import com.agora.agora.domain.dto.UserDto;
+import com.agora.agora.domain.entity.User;
 import com.agora.agora.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -26,14 +26,10 @@ public class FormUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account = userRepository.findByUsername(username);
-        if (account == null) {
-            throw new UsernameNotFoundException(username);
-        }
-
-        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(account.getRoles()));
-        AccountDto accountDto = modelMapper.map(account, AccountDto.class);
-
-        return new AccountContext(accountDto, authorities);
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(user.getRoles()));
+        UserDto userDto = modelMapper.map(user, UserDto.class);
+        return new UserContext(userDto, authorities);
     }
 }

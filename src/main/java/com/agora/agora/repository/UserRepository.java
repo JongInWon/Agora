@@ -1,11 +1,15 @@
 package com.agora.agora.repository;
 
-import com.agora.agora.domain.entity.Account;
+import com.agora.agora.domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<Account, Long> {
-    
-    Account findByUsername(String username);
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+
+    Optional<User> findByUsername(String username);
 
     boolean existsByUsername(String username);
 }

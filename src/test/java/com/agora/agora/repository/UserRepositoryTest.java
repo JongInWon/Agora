@@ -1,13 +1,15 @@
 package com.agora.agora.repository;
 
-import com.agora.agora.domain.entity.Account;
+import com.agora.agora.domain.entity.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ActiveProfiles("test")
 @SpringBootTest
 class UserRepositoryTest {
 
@@ -18,7 +20,7 @@ class UserRepositoryTest {
     @Test
     void createUser() {
         // given
-        Account user = Account.builder()
+        User user = User.builder()
                 .username("qwer")
                 .password("123456")
                 .build();
@@ -27,14 +29,18 @@ class UserRepositoryTest {
         userRepository.save(user);
 
         // then
-        assertThat(userRepository.existsByUsername("qwer")).isTrue();
+        assertThat(userRepository.findByUsername("qwer"))
+                .isPresent()
+                .get()
+                .extracting("username")
+                .isEqualTo("qwer");
     }
 
     @DisplayName("회원 레파지토리에서 중복된 아이디가 있는지 검사한다.")
     @Test
     void duplicateUsername() {
         // given
-        Account user = Account.builder()
+        User user = User.builder()
                 .username("qwer")
                 .password("123456")
                 .build();

@@ -6,31 +6,25 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
 import java.util.List;
 
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class AccountContext implements UserDetails {
+public class UserContext implements UserDetails {
 
-    private final AccountDto accountDto;
+    @Getter
+    private final UserDto userDto;
     private final List<GrantedAuthority> authorities;
-
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
 
     @Override
     public String getPassword() {
-        return accountDto.getPassword();
+        return userDto.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return accountDto.getUsername();
+        return userDto.getUsername();
     }
 
     @Override

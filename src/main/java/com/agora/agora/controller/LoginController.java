@@ -1,6 +1,6 @@
 package com.agora.agora.controller;
 
-import com.agora.agora.domain.dto.AccountDto;
+import com.agora.agora.domain.dto.UserDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ public class LoginController {
 
     @GetMapping("/signup")
     public String signup(Model model) {
-        model.addAttribute("accountDto", new AccountDto());
+        model.addAttribute("userDto", new UserDto());
         return "login/signup";
     }
 

@@ -51,6 +51,15 @@
             font-size: 14px;
             margin-bottom: 10px;
         }
+
+        .review_wrapper {
+            color: #353535;
+        }
+
+        textarea {
+            width: 1080px;
+            height: 800px;
+        }
     </style>
 </head>
 <title>Hello</title>
@@ -93,6 +102,8 @@
             </div>
         </div>
     </div>
+
+    <div th:replace="~{components/review/oneLineReview::oneLineReview(isbn=${documents[0].isbn})}"></div>
 </div>
 </body>
 </html>
